@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r run build",
+    "clean": "pnpm -r run clean",
+    "test": "pnpm -r run test",
+    "format": "pnpm -r run format",
+    "lint": "pnpm -r run lint"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "ckb-testtool": "~1.0.3",
+    "prettier": "~3.5.3",
+    "prettier-plugin-organize-imports": "~4.1.0",
+    "rimraf": "~6.0.1",
+    "tsx": "^4.23.15",
+    "typescript": "~5.8.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "@ckb-ccc/core": "^1.23.0"
+  }
+}
