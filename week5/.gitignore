@@ -1,0 +1,6 @@
+fiber/.local/
+fiber/tools/
+*.key
+*.pem
+*.seed
+*.log
