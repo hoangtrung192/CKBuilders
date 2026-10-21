@@ -1,0 +1,15 @@
+{
+  "network": "devnet",
+  "rpcUrl": "http://127.0.0.1:8114",
+  "txHash": "0xf14605a792411f4f833848d92834e30456ee681c1b3355a4133c2cc216f0d4a4",
+  "outputIndex": 0,
+  "capacity": "30000000000",
+  "recipientAddress": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq2prryvze6fhufxkgjx35psh7w70k3hz7c3mtl4d",
+  "recipientLockHash": "0x4472b33b4e1845ebe82f2ce5f511bbe012f144c5f3d7b539909adffc83ccda61",
+  "secretHash": "0x8bdc9903bcb46c914a84664c6fd0169206c1a0a9e9d16b7022a534b8252d607c",
+  "vaultLock": {
+    "codeHash": "0xbeb3f510a608fbe97654da3dddb35b0214f3dcec6e252141720e9c9c32a6a461",
+    "hashType": "data2",
+    "args": "0x0000159288f8af7dfc058942437ac3074108c754401134a7b205611c3af677c5f3b3048bdc9903bcb46c914a84664c6fd0169206c1a0a9e9d16b7022a534b8252d607c4472b33b4e1845ebe82f2ce5f511bbe012f144c5f3d7b539909adffc83ccda61"
+  }
+}

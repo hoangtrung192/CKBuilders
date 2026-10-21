@@ -1,0 +1,215 @@
+﻿import { useEffect, useState } from "react";
+import { ccc } from "@ckb-ccc/connector-react";
+import { openDevnetClient } from "./devnet";
+import "./index.css";
+
+function WalletDashboard() {
+  const { client } = ccc.useCcc();
+  const [signer, setSigner] = useState<ccc.Signer>();
+  const wallet = { name: "Demo Devnet" };
+
+  function open() {
+    const demo = new ccc.SignerCkbPrivateKey(
+      client,
+      `0x${"11".repeat(32)}`,
+    );
+
+    void demo.connect()
+      .then(() => setSigner(demo))
+      .catch((error: unknown) => {
+        setError(
+          error instanceof Error ? error.message : String(error),
+        );
+      });
+  }
+
+  function disconnect() {
+    setSigner(undefined);
+  }
+
+  const [address, setAddress] = useState("");
+  const [balance, setBalance] = useState("");
+  const [block, setBlock] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [refresh, setRefresh] = useState(0);
+
+  useEffect(() => {
+    let active = true;
+
+    async function load() {
+      setLoading(true);
+      setError("");
+      setAddress("");
+      setBalance("");
+      setBlock("");
+
+      try {
+        const tip = await client.getTip();
+
+        if (!active) return;
+        setBlock(tip.toString());
+
+        if (signer) {
+          const nextAddress = await signer.getRecommendedAddress();
+          const nextBalance = await signer.getBalance();
+
+          if (!active) return;
+          setAddress(nextAddress);
+          setBalance(ccc.fixedPointToString(nextBalance));
+        }
+      } catch (error) {
+        if (active) {
+          setError(
+            error instanceof Error ? error.message : String(error),
+          );
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    }
+
+    void load();
+
+    return () => {
+      active = false;
+    };
+  }, [client, signer, refresh]);
+
+  return (
+    <main className="shell">
+      <header className="topbar">
+        <a className="brand" href="/">SECRET VAULT</a>
+        <span className="badge">CKB DEVNET</span>
+      </header>
+
+      <section className="hero">
+        <p className="eyebrow">WEEK 06 · CKB BUILDER</p>
+        <h1>Một bí mật.<br />Một chiếc vault.</h1>
+        <p className="intro">
+          Khóa CKB bằng hash của secret và chỉ định người nhận.
+          Contract kiểm tra điều kiện trước khi cho phép mở vault.
+        </p>
+      </section>
+
+      <section className="grid">
+        <article className="card">
+          <p className="eyebrow">01 / KẾT NỐI</p>
+          <h2>Ví của bạn</h2>
+
+          {signer ? (
+            <>
+              <p className="muted">
+                Đã kết nối {wallet?.name ?? "ví"}
+              </p>
+              <button
+                className="secondary"
+                onClick={() => { disconnect(); }}
+              >
+                Ngắt kết nối
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="muted">
+                Kết nối ví để đọc địa chỉ và số dư trên Devnet.
+              </p>
+              <button onClick={() => { open(); }}>
+                Kết nối ví
+              </button>
+            </>
+          )}
+
+          <div className="field">
+            <span>Địa chỉ</span>
+            <code>{address || (signer ? "Đang đọc..." : "Chưa kết nối")}</code>
+          </div>
+
+          <div className="balance">
+            <span>Số dư Devnet</span>
+            <strong>
+              {balance || (signer ? "..." : "—")} <small>CKB</small>
+            </strong>
+          </div>
+        </article>
+
+        <article className="card">
+          <p className="eyebrow">02 / MẠNG</p>
+          <h2>Local Devnet</h2>
+
+          <div className="field">
+            <span>RPC node</span>
+            <code>http://127.0.0.1:8114</code>
+          </div>
+
+          <div className="field">
+            <span>Block hiện tại</span>
+            <strong>{block || "—"}</strong>
+          </div>
+
+          <p className="status" role="status">
+            {loading
+              ? "Đang tải dữ liệu..."
+              : error
+                ? "Không tải được đầy đủ dữ liệu"
+                : "Đã cập nhật dữ liệu"}
+          </p>
+
+          <button
+            className="secondary"
+            disabled={loading}
+            onClick={() => setRefresh((value) => value + 1)}
+          >
+            Làm mới
+          </button>
+        </article>
+      </section>
+
+      {error && <p className="error" role="alert">{error}</p>}
+
+      <footer>
+        Secret Vault · TypeScript contract · CCC · React
+      </footer>
+    </main>
+  );
+}
+
+export default function App() {
+  const [client, setClient] = useState<ccc.Client>();
+  const [startupError, setStartupError] = useState("");
+
+  useEffect(() => {
+    try {
+      const owner = openDevnetClient();
+      setClient(owner.value);
+
+      return () => {
+        void owner.dispose().catch(() => {});
+      };
+    } catch (error) {
+      setStartupError(
+        error instanceof Error ? error.message : String(error),
+      );
+    }
+  }, []);
+
+  if (startupError) {
+    return <p className="error">{startupError}</p>;
+  }
+
+  if (!client) {
+    return <p className="startup">Đang khởi tạo Devnet...</p>;
+  }
+
+  return (
+    <ccc.Provider
+      name="Secret Vault"
+      defaultClient={client}
+      clientOptions={[{ name: "Local Devnet", client }]}
+      hideKhie
+    >
+      <WalletDashboard />
+    </ccc.Provider>
+  );
+}
+

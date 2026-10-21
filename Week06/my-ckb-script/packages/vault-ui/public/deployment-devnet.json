@@ -1,0 +1,32 @@
+﻿{
+    "jsVm":  {
+                 "cellDeps":  [
+                                  {
+                                      "cellDep":  {
+                                                      "outPoint":  {
+                                                                       "txHash":  "0xf0129eba6fb1f663c645b54dead36c1a6175357a113d5b4e90e1e15b29232576",
+                                                                       "index":  0
+                                                                   },
+                                                      "depType":  "code"
+                                                  }
+                                  }
+                              ],
+                 "hashType":  "data2",
+                 "codeHash":  "0xbeb3f510a608fbe97654da3dddb35b0214f3dcec6e252141720e9c9c32a6a461"
+             },
+    "vaultCode":  {
+                      "cellDeps":  [
+                                       {
+                                           "cellDep":  {
+                                                           "outPoint":  {
+                                                                            "txHash":  "0x3553740b7c0edf78877c04eac534fdcd2fd894af0e801eb7236090d71c1cca5b",
+                                                                            "index":  0
+                                                                        },
+                                                           "depType":  "code"
+                                                       }
+                                       }
+                                   ],
+                      "hashType":  "data2",
+                      "codeHash":  "0x159288f8af7dfc058942437ac3074108c754401134a7b205611c3af677c5f3b3"
+                  }
+}

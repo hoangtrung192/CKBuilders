@@ -1,0 +1,210 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap");
+
+:root {
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  color: #eaf3ed;
+  background: #101813;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.shell {
+  max-width: 1120px;
+  margin: auto;
+  padding: 30px 28px 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #304033;
+}
+
+.brand {
+  color: #eaf3ed;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+.badge {
+  padding: 8px 12px;
+  border: 1px solid #647b49;
+  border-radius: 999px;
+  color: #c5ec93;
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.hero { padding: 62px 0 38px; }
+.eyebrow {
+  color: #b8d294;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .13em;
+}
+
+h1 {
+  margin: 18px 0;
+  font-size: clamp(38px, 6vw, 66px);
+  line-height: 1.15;
+  letter-spacing: -.055em;
+}
+
+.intro {
+  max-width: 620px;
+  color: #aebdb2;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  padding: 28px;
+  border: 1px solid #354638;
+  border-radius: 20px;
+  background: #19241c;
+}
+
+h2 { margin: 12px 0; font-size: 25px; }
+.muted { color: #aebdb2; font-size: 14px; line-height: 1.8; }
+
+button {
+  padding: 12px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: #c5ec93;
+  color: #182412;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(1.08); }
+button:disabled { opacity: .5; cursor: wait; }
+button:focus-visible, a:focus-visible {
+  outline: 3px solid #e1ffb8;
+  outline-offset: 4px;
+}
+
+.secondary {
+  color: #eaf3ed;
+  background: transparent;
+  border-color: #546c57;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.field > span, .balance > span {
+  font-size: 12px;
+  color: #aebdb2;
+}
+
+code {
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.balance {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #354638;
+}
+
+.balance strong { font-size: 30px; overflow-wrap: anywhere; }
+.balance small { font-size: 14px; color: #aebdb2; }
+.status { color: #b8d294; font-size: 12px; margin: 26px 0 18px; }
+
+.error {
+  padding: 18px;
+  color: #ffd5cb;
+  border: 1px solid #8b5c50;
+  border-radius: 12px;
+  background: #402820;
+  overflow-wrap: anywhere;
+}
+
+.startup { padding: 30px; }
+footer { margin-top: 36px; color: #94a799; font-size: 11px; }
+
+@media (max-width: 700px) {
+  .shell { padding: 22px 18px; }
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 40px; }
+  .card { padding: 22px; }
+}
+
+.vault-form {
+  margin-top: 24px;
+}
+
+.vault-form fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.vault-form input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #546c57;
+  border-radius: 10px;
+  background: #101813;
+  color: #eaf3ed;
+  font: inherit;
+  font-size: 14px;
+}
+
+.vault-form input:focus-visible {
+  outline: 2px solid #c5ec93;
+  outline-offset: 2px;
+}
+
+.vault-form button {
+  margin-top: 24px;
+}
+
+.vault-form fieldset:disabled {
+  opacity: .65;
+}
+
+.vault-form textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #546c57;
+  border-radius: 10px;
+  background: #101813;
+  color: #eaf3ed;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.vault-form textarea:focus-visible {
+  outline: 2px solid #c5ec93;
+  outline-offset: 2px;
+}

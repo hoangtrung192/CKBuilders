@@ -1,0 +1,21 @@
+{
+  "devnet": {
+    "ckb-js-vm": {
+      "codeHash": "0xbeb3f510a608fbe97654da3dddb35b0214f3dcec6e252141720e9c9c32a6a461",
+      "hashType": "data2",
+      "cellDeps": [
+        {
+          "cellDep": {
+            "outPoint": {
+              "txHash": "0xf0129eba6fb1f663c645b54dead36c1a6175357a113d5b4e90e1e15b29232576",
+              "index": 0
+            },
+            "depType": "code"
+          }
+        }
+      ]
+    }
+  },
+  "testnet": {},
+  "mainnet": {}
+}
