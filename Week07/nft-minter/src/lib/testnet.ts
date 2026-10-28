@@ -15,9 +15,17 @@ export function explorerTransaction(hash: string): string {
 export function assertTestnetIdentity(chain: string, genesis: string) {
   if (chain !== 'ckb_testnet' || genesis !== TESTNET_GENESIS) throw new Error('Network identity mismatch. This app requires the public CKB Testnet; signing is blocked.');
 }
+function underlyingClient(client: ccc.Client): ccc.Client {
+  // CCC's connector wraps the selected client to support custom fee rates.
+  // Compare the original clients so that wrapper changes aren't network changes.
+  while (ccc.Proxy.inner in client) {
+    client = (client as ccc.Client & { [ccc.Proxy.inner]: ccc.Client })[ccc.Proxy.inner];
+  }
+  return client;
+}
 export function assertTestnetSigner(client: ccc.Client, signer?: ccc.Signer): asserts signer is ccc.Signer {
   if (!signer) throw new Error('Connect a Testnet wallet first.');
-  if (signer.client !== client) throw new Error('Wallet network changed. Reconnect using CKB Testnet.');
+  if (underlyingClient(signer.client) !== underlyingClient(client)) throw new Error('Wallet network changed. Reconnect using CKB Testnet.');
   if (signer instanceof ccc.SignerCkbPrivateKey) throw new Error('Built-in private-key signing is disabled on Testnet. Connect your own wallet.');
 }
 export async function walletBalance(client: ccc.Client, signer: ccc.Signer): Promise<WalletBalance> {

@@ -23,3 +23,20 @@ test('No Testnet signer is created without a connected external wallet', () => {
   const other = new ccc.ClientPublicTestnet({ url: TESTNET_RPC });
   assert.throws(() => assertTestnetSigner(other, privateSigner), /network changed/);
 });
+
+test('CCC client wrappers preserve wallet network identity', () => {
+  const client = new ccc.ClientPublicTestnet({ url: TESTNET_RPC });
+  const WrappedClient = ccc.Proxy.Base(ccc.ClientPublicTestnet);
+  const wrapped = new WrappedClient(client);
+  const nested = new WrappedClient(wrapped);
+  const lock = { codeHash: `0x${'1'.repeat(64)}`, hashType: 'type' as const, args: '0x' };
+  const signer = new ccc.SignerCkbScriptReadonly(wrapped, lock);
+  assert.doesNotThrow(() => assertTestnetSigner(client, signer));
+  assert.doesNotThrow(() => assertTestnetSigner(nested, signer));
+  assert.doesNotThrow(() => assertTestnetSigner(wrapped, new ccc.SignerCkbScriptReadonly(client, lock)));
+
+  const other = new ccc.ClientPublicTestnet({ url: TESTNET_RPC });
+  assert.throws(() => assertTestnetSigner(other, signer), /network changed/);
+  assert.throws(() => assertTestnetSigner(client, new ccc.SignerCkbScriptReadonly(new ccc.ClientPublicMainnet(), lock)), /network changed/);
+  assert.throws(() => assertTestnetSigner(client, new ccc.SignerCkbPrivateKey(nested, `0x${'0'.repeat(63)}1`)), /private-key/);
+});
