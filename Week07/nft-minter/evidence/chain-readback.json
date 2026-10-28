@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-28T15:41:45.413Z",
+  "genesis": "0xb15fa8a50781f3a8bf84759682e2ce4027b7ae5361df45e8b68855ee413104be",
+  "checks": {
+    "reconstructBothCollections": true,
+    "nonOwnerTransferRejected": true,
+    "wrongGenesisSignerBlocked": true
+  },
+  "aIds": [
+    "0xe0e34fba784529d7ba0ee75749aafb7943f2b9f3102018839288d957bd8837a9",
+    "0x0255c826dc4dc5fb81ea054b1f5e6aed574b2ed27d491668bd826b22fa6656c1"
+  ],
+  "bIds": [
+    "0xba64e1aab178c428bdfc6552b7b65c13e15ae745d5bca7e6340ca5a8adca8b03"
+  ]
+}

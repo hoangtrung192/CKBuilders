@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { loadEnv } from 'vite';
+import { createSession } from '../src/lib/client';
+import { listAssets, prepareTransfer } from '../src/lib/spore';
+import { session } from './env';
+const historical = JSON.parse(readFileSync('evidence/chain-smoke.json', 'utf8'));
+assert.equal(historical.genesis, session.config.genesis, 'Evidence is historical: this is a different chain.');
+const transferred = historical.results.find((x: {kind?:string}) => x.kind === 'transfer');
+const a = await listAssets(session, 'A'); const b = await listAssets(session, 'B');
+const asset = b.find(x => x.id === transferred.id); assert.ok(asset); assert.ok(!a.some(x => x.id === asset.id));
+await assert.rejects(() => prepareTransfer(session, 'A', asset, transferred.to), /no longer owns/);
+const badSession = createSession({ ...loadEnv('development', process.cwd(), 'VITE_'), VITE_EXPECTED_GENESIS_HASH: `0x${'0'.repeat(64)}` });
+await assert.rejects(() => badSession.signer('A'), /identity mismatch/);
+const record = { at: new Date().toISOString(), genesis: session.config.genesis, checks: { reconstructBothCollections: true, nonOwnerTransferRejected: true, wrongGenesisSignerBlocked: true }, aIds: a.map(x=>x.id), bIds: b.map(x=>x.id) };
+writeFileSync('evidence/chain-readback.json', JSON.stringify(record, null, 2)); console.log(record);

@@ -1,0 +1,15 @@
+import { writeFileSync } from 'node:fs';
+import { ccc } from '@ckb-ccc/core';
+import { createTestnetSession, TESTNET_RPC, TESTNET_GENESIS, explorerTransaction } from '../src/lib/testnet';
+import { rpc } from '../src/lib/config';
+const client = new ccc.ClientPublicTestnet({ url: TESTNET_RPC });
+const session = createTestnetSession(client, () => undefined);
+const info = await session.ready();
+const secondGenesis = await rpc<string>('https://testnet.ckbapp.dev/', 'get_block_hash', ['0x0']);
+if (secondGenesis !== TESTNET_GENESIS) throw new Error('Official Testnet RPCs disagree about genesis.');
+const script = session.spore;
+const dependency = script.cellDeps[0].cellDep.outPoint;
+const transaction = await client.getTransactionNoCache(dependency.txHash);
+if (transaction?.status !== 'committed') throw new Error('SDK Spore deployment transaction is not committed.');
+const result = { at: new Date().toISOString(), network: info.chain, rpc: TESTNET_RPC, genesis: TESTNET_GENESIS, independentlyCheckedGenesis: secondGenesis, sporeCodeHash: script.codeHash, sporeHashType: script.hashType, deploymentTransaction: dependency.txHash, deploymentStatus: transaction.status, deploymentExplorer: explorerTransaction(dependency.txHash), ownMintOrTransferSubmitted: false };
+writeFileSync('evidence/testnet-diagnostics.json', JSON.stringify(result, null, 2)); console.log(result);

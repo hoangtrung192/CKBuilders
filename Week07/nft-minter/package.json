@@ -1,0 +1,38 @@
+{
+  "name": "week07-ckb-nft-minter",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.16.0 <23"
+  },
+  "packageManager": "pnpm@12.4.1",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "tsx --test src/lib/*.test.ts",
+    "configure": "node scripts/configure.mjs",
+    "diagnose": "tsx scripts/diagnose.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "check:chain": "tsx scripts/check-chain.ts",
+    "configure:testnet": "node scripts/configure-testnet.mjs",
+    "diagnose:testnet": "tsx scripts/diagnose-testnet.ts"
+  },
+  "dependencies": {
+    "@ckb-ccc/connector-react": "2.2.2",
+    "@ckb-ccc/core": "1.23.0",
+    "@ckb-ccc/spore": "1.6.15",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.30",
+    "@types/react": "19.1.6",
+    "@types/react-dom": "19.1.6",
+    "@vitejs/plugin-react": "4.5.2",
+    "tsx": "4.23.15",
+    "typescript": "5.8.3",
+    "vite": "6.3.6"
+  }
+}

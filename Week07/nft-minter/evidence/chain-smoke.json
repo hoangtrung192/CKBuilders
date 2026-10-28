@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-28T15:34:01.695Z",
+  "genesis": "0xb15fa8a50781f3a8bf84759682e2ce4027b7ae5361df45e8b68855ee413104be",
+  "results": [
+    {
+      "check": "invalid recipient and insufficient capacity",
+      "passed": true
+    },
+    {
+      "kind": "mint",
+      "type": "text/plain",
+      "hash": "0x2fe27b6077cf24ad3dd095a377d0b37508ae569f66e1cb3f891ddbbadcc07572",
+      "id": "0xba64e1aab178c428bdfc6552b7b65c13e15ae745d5bca7e6340ca5a8adca8b03",
+      "bytes": 47,
+      "fee": "956"
+    },
+    {
+      "kind": "mint",
+      "type": "image/png",
+      "hash": "0x5ed3da8aed37cf1a7bb42c6d63caa2774b72ca91e4dbc47bcd5f25bb4e3ed4fe",
+      "id": "0x0255c826dc4dc5fb81ea054b1f5e6aed574b2ed27d491668bd826b22fa6656c1",
+      "bytes": 68,
+      "fee": "976"
+    },
+    {
+      "kind": "transfer",
+      "hash": "0x731fd993861cd5b1c89847942c0f2f066b6208142b706d20b248926b4288ff32",
+      "id": "0xba64e1aab178c428bdfc6552b7b65c13e15ae745d5bca7e6340ca5a8adca8b03",
+      "from": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqvwg2cen8extgq8s5puft8vf40px3f599cytcyd8",
+      "to": "ckt1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsqt435c3epyrupszm7khk6weq5lrlyt52lg48ucew",
+      "unchangedData": true,
+      "absentFromA": true,
+      "presentInB": true
+    }
+  ]
+}
