@@ -1,0 +1,40 @@
+{
+  "name": "week08-fiber-mines",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "tsx --test tests/*.test.ts",
+    "verify": "tsx scripts/verify.ts",
+    "verify:receipt": "tsx scripts/verify-receipt.ts"
+  },
+  "dependencies": {
+    "@ckb-ccc/connector-react": "^2.2.2",
+    "@ckb-ccc/core": "1.23.0",
+    "@fiber-pay/sdk": "0.3.3",
+    "@nervosnetwork/fiber-js": "0.9.1",
+    "next": "16.4.5",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.19.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.4.5",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "type": "module"
+}
