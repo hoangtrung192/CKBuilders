@@ -1,0 +1,12 @@
+[package]
+name = "simple-lock"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ckb-std = "1.1"
+ckb-hash = {version = "1.1", default-features = false, features = ["ckb-contract"] }
+
+[features]
+library = []
+native-simulator = ["library", "ckb-std/native-simulator"]
